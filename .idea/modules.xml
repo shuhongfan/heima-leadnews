@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/heima-leadnews.iml" filepath="$PROJECT_DIR$/.idea/heima-leadnews.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateways/admin-gateway/admin-gateway.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateways/admin-gateway/admin-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-services/admin-service/admin-service.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-services/admin-service/admin-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-exception-spring-boot-starter/heima-exception-spring-boot-starter.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-exception-spring-boot-starter/heima-exception-spring-boot-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-knife4j-spring-boot-starter/heima-knife4j-spring-boot-starter.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-knife4j-spring-boot-starter/heima-knife4j-spring-boot-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-leadnews-basic.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-leadnews-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/heima-leadnews-common.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/heima-leadnews-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign/heima-leadnews-feign.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign/heima-leadnews-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateways/heima-leadnews-gateways.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateways/heima-leadnews-gateways.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-model/heima-leadnews-model.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-model/heima-leadnews-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-services/heima-leadnews-services.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-services/heima-leadnews-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/heima-leadnews-test.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/heima-leadnews-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-utils/heima-leadnews-utils.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-utils/heima-leadnews-utils.iml" />
     </modules>
   </component>
 </project>

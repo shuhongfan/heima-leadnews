@@ -1,0 +1,33 @@
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+  box-shadow:0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.el-dialog__header {
+  // padding: 30px 0 0 30px;
+  text-align: left;
+}
+
+.el-dialog__title {
+  color: $--color-text-secondary;
+  font-weight: 500;
+}
+
+.el-dialog__headerbtn {
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+}
+
+.el-dialog__footer {
+  padding: 19px 30px 30px;
+}
+
+.el-dialog--center .el-dialog__body {
+  text-align: center;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-exception-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-knife4j-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateways/admin-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateways/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-services/admin-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-utils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

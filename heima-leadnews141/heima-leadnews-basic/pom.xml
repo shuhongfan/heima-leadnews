@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>heima-leadnews</artifactId>
+        <groupId>com.heima</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>heima-leadnews-basic</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>heima-knife4j-spring-boot-starter</module>
+        <module>heima-exception-spring-boot-starter</module>
+        <module>heima-file-spring-boot-starter</module>
+        <module>heima-aliyunsecurity-spring-boot-starter</module>
+        <module>heima-schedule-spring-boot-starter</module>
+        <module>heima-es-spring-boot-starter</module>
+    </modules>
+</project>

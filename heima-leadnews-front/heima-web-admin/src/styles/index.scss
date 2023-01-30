@@ -1,0 +1,229 @@
+@import '../scss/element-variables.scss';
+@import './variables.scss';
+@import './mixin.scss';
+// @import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+// @import './btn.scss';
+
+body {
+  min-width: 1366px;
+  // 600的内容高度即可在大多数电脑中全部显示，比较安全
+  min-height: 600px; // 768px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  // overflow-x: auto;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+  font-family: Microsoft YaHei;
+}
+
+.app-wrapper {
+  padding: 40px 40px 40px 0;
+  background-color: $--background-color-base;
+  background-image: url('../assets/index/img_bj_zuoshang@2x.png'), url('../assets/index/img_bj_zuoxia@2x.png');
+  background-size: 183px 179px, 305px 238px;
+  background-position: 0 0, 107px 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat, no-repeat;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+li {
+  list-style: none;
+}
+dl,dd,dt,ul,li{
+  margin: 0;
+  padding: 0;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+b {
+  font-weight: normal;
+}
+
+div:focus {
+  outline: none;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inline-block {
+  display: block;
+}
+
+code {
+  background: #eef1f6;
+  padding: 15px 16px;
+  margin-bottom: 20px;
+  display: block;
+  line-height: 36px;
+  font-size: 15px;
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+
+  a {
+    color: #337ab7;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+  }
+}
+
+.warn-content {
+  background: rgba(66, 185, 131, .1);
+  border-radius: 2px;
+  padding: 16px;
+  padding: 1rem;
+  line-height: 1.6rem;
+  word-spacing: .05rem;
+
+  a {
+    color: #42b983;
+    font-weight: 600; 
+  }
+}
+
+//main-container全局样式
+.app-container {
+  padding: 20px;
+}
+
+.components-container {
+  margin: 30px 50px;
+  position: relative;
+}
+
+.pagination-container {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center
+}
+
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+}
+
+.filter-container {
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}

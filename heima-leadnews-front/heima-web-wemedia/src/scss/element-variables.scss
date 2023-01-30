@@ -1,0 +1,42 @@
+/* 改变主色变量 */
+$--color-primary: #3175FB; // 主色
+
+/* 改变辅助色变量 */
+$--color-success: #3BD396; // 成功色
+$--color-warning: #F7C739; // 警示色
+$--color-danger: #FF5C5C; // 报错色
+
+/* 改变中性色变量 */
+$--color-text-primary: #17233E; // 主要文字
+$--color-text-secondary: #58637D; // 次要文字
+$--color-text-placeholder: #BAC0CD; // 占位文字
+$--border-color-base: #D8DDE3; // 边框色
+$--background-color-base: #F3F4F7; // 背景色
+// TODO: 分割线色
+$--color-black: #000000; // 基础黑
+$--color-white: #FFFFFF; // 基础白
+
+/* 改变字号变量 */
+$--font-size-extra-large: 20px; // 大标题
+$--font-size-large: 18px; // 标题
+$--font-size-base: 14px; // 正文
+$--font-size-small: 13px; // 正文（小）
+
+/* 改变基础按钮变量 */
+$--primary-background-color: #3BD396; // 重要按钮
+$--primary-border-color: #3BD396;
+$--success-background-color: #3175FB; // 次重要按钮（用户成功按钮替代）
+$--success-border-color: #3175FB;
+$--warning-background-color: #F3F4F7; // 次要按钮（用户警告按钮替代）
+$--warning-border-color: #F3F4F7;
+$--warning-font-color: #17233E;
+$--danger-background-color: #FF5C5C; // 警示性按钮
+$--danger-border-color: #FF5C5C;
+
+/* 按钮移入/按下样式，不是element ui自带的样式，是自定义的 */
+$--primary-background-color-hover: #2AB47D; // 重要按钮
+$--primary-background-color-disabled: #C4E2D6; // 重要按钮
+$--success-background-color-hover: #0F54DD; // 次重要按钮（用户成功按钮替代）
+$--warning-background-color-hover: #0F54DD; // 次要按钮（用户警告按钮替代）
+$--danger-background-color-hover: #E54444; // 警示性按钮
+$--danger-background-color-hover-disabled: #F6CACA; // 警示性按钮

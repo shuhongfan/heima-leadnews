@@ -1,0 +1,52 @@
+.filter {
+  display: flex;
+  height: 96px;
+  padding-left: 30px;
+  padding-right: 30px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #EBEEF5;
+  text-align: left;
+}
+
+.filter-container .filter-item {
+  margin-bottom: 0!important;
+}
+
+.filter-container {
+  .el-input__inner {
+    background-color: $--background-color-base;
+    border-color: $--background-color-base;
+  }
+
+  .el-input__inner::-webkit-input-placeholder {
+    color: $--color-text-placeholder;
+  }
+
+  .el-input__inner::-ms-input-placeholder {
+      color: $--color-text-placeholder;
+  }
+
+  .el-input__inner::placeholder {
+      color: $--color-text-placeholder;
+  }
+
+  .el-input__inner:hover {
+    border-color: #818693;
+  }
+
+  .el-input.is-active .el-input__inner,.el-input__inner:focus {
+    border-color: $--color-primary;
+    color: $--color-text-primary;
+  }
+
+  .el-date-editor .el-range-input {
+    background-color: $--background-color-base;
+  }
+
+  .el-range-editor.is-active, .el-range-editor.is-active:hover {
+    border-color: $--color-primary;
+    color: $--color-text-primary;
+  }
+}

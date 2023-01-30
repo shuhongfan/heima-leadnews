@@ -1,0 +1,15 @@
+#server:
+#  port: 9001
+#spring:
+#  application:
+#    name: leadnews-admin
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.200.130:3306/leadnews_admin?useUnicode=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+#    username: root
+#    password: root
+## 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置
+#mybatis-plus:
+#  mapper-locations: classpath*:mapper/*.xml
+#  # 设置别名包扫描路径，通过该属性可以给包中的类注册别名
+#  type-aliases-package: com.heima.model.admin.pojos

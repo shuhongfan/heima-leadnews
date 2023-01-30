@@ -1,0 +1,44 @@
+.el-input__inner {
+  // max-width: 293px;
+  height: 36px;
+  background-color: $--background-color-base;
+  border-color: $--background-color-base;
+}
+
+.el-select {
+  .el-input__inner {
+    // width: 289px;
+    // height: 36px;
+    // TODO: 1.UI图上height:40px，考虑下怎么写 2.options的样式调整
+  }
+}
+
+.el-input__inner::-webkit-input-placeholder {
+  color: $--color-text-placeholder;
+}
+
+.el-input__inner::-ms-input-placeholder {
+    color: $--color-text-placeholder;
+}
+
+.el-input__inner::placeholder {
+    color: $--color-text-placeholder;
+}
+
+.el-input__inner:hover {
+  border-color: #818693;
+}
+
+.el-input.is-active .el-input__inner,.el-input__inner:focus {
+  border-color: $--color-primary;
+  color: $--color-text-primary;
+}
+
+.el-date-editor .el-range-input {
+  background-color: $--background-color-base;
+}
+
+.el-range-editor.is-active, .el-range-editor.is-active:hover {
+  border-color: $--color-primary;
+  color: $--color-text-primary;
+}

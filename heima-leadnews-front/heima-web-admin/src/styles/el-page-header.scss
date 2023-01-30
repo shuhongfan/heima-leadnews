@@ -1,0 +1,14 @@
+.el-page-header {
+  .el-page-header__left {
+    color: $--color-text-secondary;
+  }
+
+  .el-page-header__left:hover {
+    color: $--color-primary;
+  }
+
+  .el-page-header__content {
+    color: #20232A;
+    font-weight: 600;
+  }
+}

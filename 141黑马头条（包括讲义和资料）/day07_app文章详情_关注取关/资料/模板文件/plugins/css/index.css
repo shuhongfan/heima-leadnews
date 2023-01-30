@@ -1,0 +1,141 @@
+html {
+    overflow-x: hidden;
+}
+
+#app {
+    position: relative;
+    width: 750px;
+    margin: 0 auto;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+.article {
+    padding: 0 40px 120px;
+}
+
+.article-title {
+    margin-top: 48px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #3A3A3A;
+    line-height: 65px;
+}
+
+.article-header {
+    margin-top: 57px;
+}
+
+.article-content {
+    margin-top: 39px;
+}
+
+.article-avatar {
+    width: 70px;
+    height: 70px;
+}
+
+.article-author {
+    font-size: 28px;
+    font-weight: 400;
+    color: #3A3A3A;
+}
+
+.article-publish-time {
+    font-size: 24px;
+    font-weight: 400;
+    color: #B4B4B4;
+}
+
+.article-focus {
+    width: 170px;
+    height: 58px;
+    font-size: 28px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.article-text {
+    font-size: 32px;
+    font-weight: 400;
+    color: #3A3A3A;
+    line-height: 56px;
+    text-align: justify;
+}
+
+.article-action {
+    margin-top: 59px;
+}
+
+.article-like {
+    width: 156px;
+    height: 58px;
+    font-size: 25px;
+    font-weight: 400;
+    color: #777777;
+}
+
+.article-unlike {
+    width: 156px;
+    height: 58px;
+    margin-left: 42px;
+    font-size: 25px;
+    font-weight: 400;
+    color: #E22829;
+}
+
+.article-comment {
+    margin-top: 69px;
+}
+
+.comment-author {
+    font-size: 24px;
+    font-weight: 400;
+    color: #777777;
+    line-height: 49px;
+}
+
+.comment-content {
+    font-size: 32px;
+    font-weight: 400;
+    color: #3A3A3A;
+    line-height: 49px;
+}
+
+.comment-time {
+    font-size: 24px;
+    font-weight: 400;
+    color: #B4B4B4;
+    line-height: 49px;
+}
+
+.article-comment-reply {
+    padding: 40px;
+}
+
+.article-bottom-bar, .comment-reply-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    width: 750px;
+    height: 99px;
+    background: #F4F5F6;
+}
+
+.article-bottom-bar .van-field, .comment-reply-bottom-bar .van-field {
+    width: 399px;
+    height: 64px;
+    background: #FFFFFF;
+    border: 2px solid #EEEEEE;
+    border-radius: 32px;
+    font-size: 25px;
+    font-weight: 400;
+    color: #777777;
+}
+
+.article-bottom-bar .van-button, .comment-reply-bottom-bar .van-button {
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 25px;
+    font-weight: 400;
+    color: #777777;
+}

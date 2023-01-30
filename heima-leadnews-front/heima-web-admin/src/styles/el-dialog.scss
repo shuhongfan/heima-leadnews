@@ -1,0 +1,80 @@
+//暂时性解决dialog 问题 https://github.com/ElemeFE/element/issues/2461
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+  box-shadow:0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.el-dialog__header {
+  padding: 30px 0 0 30px;
+  text-align: left;
+}
+
+.el-dialog__title {
+  color: $--color-text-secondary;
+  font-weight: 500;
+}
+
+.el-dialog__headerbtn {
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+}
+
+// TODO: 参考element ui
+.el-dialog__wrapper {
+  .dialog-input {
+    width: 290px;
+
+    .el-input__inner {
+      background-color: $--background-color-base;
+      border-color: $--background-color-base;
+    }
+  
+    .el-input__inner::-webkit-input-placeholder {
+      color: $--color-text-placeholder;
+    }
+  
+    .el-input__inner::-ms-input-placeholder {
+        color: $--color-text-placeholder;
+    }
+  
+    .el-input__inner::placeholder {
+        color: $--color-text-placeholder;
+    }
+  
+    .el-input__inner:hover {
+      border-color: #818693;
+    }
+
+    .el-input__inner:focus {
+      border-color: $--color-primary;
+      color: $--color-text-primary;
+    }
+  }
+
+  .dialog-input.is-active .el-input__inner {
+    border-color: $--color-primary;
+    color: $--color-text-primary;
+  }
+
+  .dialog-input-number {
+    .el-input__inner {
+      background-color: $--background-color-base;
+      border-color: $--background-color-base;
+    }
+
+    .el-input-number__decrease, .el-input-number__increase {
+      background: #E0E2E6;
+      border-color: #E0E2E6;
+    }
+  }
+}
+
+.el-dialog__footer {
+  padding: 10px 30px 30px;
+}

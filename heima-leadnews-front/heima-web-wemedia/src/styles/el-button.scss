@@ -1,0 +1,68 @@
+.el-button+.el-button {
+  margin-left: 20px;
+}
+
+.el-button--primary, .el-button--success, .el-button--warning, .el-button--danger {
+  height: 36px;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 36px;
+  border: none;
+}
+
+.el-button--primary:hover, .el-button--primary:focus {
+  background-color: $--primary-background-color-hover;
+}
+
+.el-button--success:hover, .el-button--success:focus {
+  background-color: $--success-background-color-hover;
+}
+
+.el-button--warning:hover, .el-button--warning:focus {
+  background-color: $--success-background-color;
+  color: $--color-white;
+}
+
+.el-button--danger:hover, .el-button--danger:focus {
+  background-color: $--danger-background-color-hover;
+}
+
+.el-button--has-icon {
+  min-width: 90px;
+}
+
+.el-button--no-icon {
+  min-width: 80px;
+}
+
+.el-button--primary-text {
+  color: $--primary-background-color;
+}
+
+.el-button--primary-text:hover, .el-button--primary-text:focus {
+  color: $--primary-background-color-hover;
+}
+
+.el-button--primary-text.is-disabled {
+  color: $--primary-background-color-disabled;
+}
+
+.el-button--success-text {
+  color: $--success-background-color;
+}
+
+.el-button--success-text:hover, .el-button--success-text:focus {
+  color: $--success-background-color-hover;
+}
+
+.el-button--danger-text {
+  color: $--danger-background-color;
+}
+
+.el-button--danger-text:hover, .el-button--danger-text:focus {
+  color: $--danger-background-color-hover;
+}
+
+.el-button--danger-text.is-disabled {
+  color: $--danger-background-color-hover-disabled;
+}

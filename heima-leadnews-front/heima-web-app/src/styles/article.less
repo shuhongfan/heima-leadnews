@@ -1,0 +1,104 @@
+// 基本样式-颜色
+@body-background        : #fff;
+@component-background   : #fff;
+// 基本样式-字体
+@font-size              : 12px;
+@font-family            : "微软雅黑","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+@code-family            : Consolas,Menlo,Courier,monospace;
+@icon-font              :fontawesome;
+// 主页文章列表样式 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ START
+@list-0-height          :160px;
+@list-1-height          :190px;
+@list-2-height          :306px;
+// 列表通用参数
+@list-lr-margin         :10px;
+@list-tb-margin         :5px;
+@list-bottom-color      :#dfdfdf;
+@list-loading-color     :#757575;
+
+@title-size             :32px;
+@title-family           :@font-family;
+@title-color            :#3A3A3A;
+
+@tag-size               :23px;
+@tag-family             :@font-family;
+@tag-color              :#999999;
+@tag-right-margin       :21px;
+
+@tag-icon-color         :#E22829;
+@tag-icon-size          :24px;
+@tag-icon-font          :@icon-font;
+@tag-icon-bg            :transparent;
+
+.list-item {
+  width: 750px;
+  flex-direction: column;
+  border-bottom-width: 1px;
+  border-bottom-color: #efefef;
+  padding-top: 8px;
+  padding-bottom:20px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+.title {
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 38px;
+  font-weight:400;
+  font-size: @title-size;
+  font-family: @title-family;
+  color: @title-color;
+  justify-content:center;
+  align-items: center;
+  margin: @list-tb-margin @list-lr-margin;
+}
+
+.tags-text{
+  font-size: @tag-size;
+  color: @tag-color;
+  font-family: @tag-family;
+  margin-right: @tag-right-margin;
+  line-height: 30px;
+}
+.tags-icon{
+  font-family: @tag-icon-font;
+  font-size: @tag-icon-size;
+  color: @tag-icon-color;
+  background-color: @tag-icon-bg;
+}
+.tags{
+  flex-direction: row;
+  margin: 15px @list-lr-margin @list-tb-margin;
+  justify-content: left;
+  align-items: center;
+}
+.date {
+  margin-top: 3px;
+}
+.line {
+  height: 2px;
+  background-color: @list-bottom-color;
+  margin: @list-lr-margin;
+}
+.loading {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 750px;
+  height: 100px;
+}
+.loading-text{
+  font-size: @title-size/1.1;
+  color: @list-loading-color;
+}
+.loading-icon{
+  width:100px;
+  height: 100px;
+  color:saturate(@list-loading-color,120%);
+}
+.image{
+  border-radius: 5px;
+  height: 160px;
+}
+// 主页文章列表样式 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ENT

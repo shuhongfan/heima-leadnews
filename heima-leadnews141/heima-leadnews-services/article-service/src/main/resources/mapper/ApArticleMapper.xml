@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.article.mapper.ApArticleMapper">
+    <resultMap id="resultMap" type="com.heima.model.article.pojos.ApArticle">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="author_id" property="authorId"/>
+        <result column="author_name" property="authorName"/>
+        <result column="channel_id" property="channelId"/>
+        <result column="channel_name" property="channelName"/>
+        <result column="layout" property="layout"/>
+        <result column="flag" property="flag"/>
+        <result column="images" property="images"/>
+        <result column="labels" property="labels"/>
+        <result column="likes" property="likes"/>
+        <result column="collection" property="collection"/>
+        <result column="comment" property="comment"/>
+        <result column="views" property="views"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="county_id" property="countyId"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="sync_status" property="syncStatus"/>
+        <result column="static_url" property="staticUrl"/>
+    </resultMap>
+    <select id="loadArticleList" resultMap="resultMap">
+        select aa.* from ap_article aa left join ap_article_config aac on aa.id = aac.article_id
+        <where>
+            aac.is_delete!=1
+            and  aac.is_down != 1
+            <if test="type == 0">
+                and aa.publish_time <![CDATA[<]]> #{dto.minBehotTime}
+            </if>
+            <if test="type == 1">
+                and aa.publish_time <![CDATA[>]]> #{dto.maxBehotTime}
+            </if>
+            <if test="dto.tag != '__all__'">
+                and aa.channel_id = #{dto.tag}
+            </if>
+        </where>
+        order by aa.publish_time desc
+        limit #{dto.size}
+    </select>
+</mapper>

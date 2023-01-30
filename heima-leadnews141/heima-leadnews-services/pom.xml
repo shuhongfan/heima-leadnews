@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>heima-leadnews</artifactId>
+        <groupId>com.heima</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>heima-leadnews-services</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>admin-service</module>
+        <module>user-service</module>
+        <module>wemedia-service</module>
+        <module>article-service</module>
+        <module>behavior-service</module>
+        <module>comment-service</module>
+        <module>data-sync-service</module>
+        <module>search-service</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>5.2</version>
+        </dependency>
+
+        <!-- 引入统一feign接口 -->
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-leadnews-feign</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- nacos 注册中心  客户端依赖 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos 配置中心  客户端依赖 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- 引入统一的 异常处理依赖 -->
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-exception-spring-boot-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- 引入统一的 knife4j依赖 -->
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-knife4j-spring-boot-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-leadnews-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-leadnews-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-leadnews-utils</artifactId>
+        </dependency>
+        <!-- Spring boot starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

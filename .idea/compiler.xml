@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admin-gateway" />
+        <module name="heima-leadnews-utils" />
+        <module name="heima-knife4j-spring-boot-starter" />
+        <module name="heima-exception-spring-boot-starter" />
+        <module name="heima-leadnews-common" />
+        <module name="heima-leadnews-model" />
+        <module name="heima-leadnews-feign" />
+        <module name="admin-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="admin-gateway" target="1.8" />
+      <module name="admin-service" target="1.8" />
+      <module name="heima-exception-spring-boot-starter" target="1.8" />
+      <module name="heima-knife4j-spring-boot-starter" target="1.8" />
+      <module name="heima-leadnews" target="1.8" />
+      <module name="heima-leadnews-basic" target="1.8" />
+      <module name="heima-leadnews-common" target="1.8" />
+      <module name="heima-leadnews-feign" target="1.8" />
+      <module name="heima-leadnews-feign-api" target="1.8" />
+      <module name="heima-leadnews-gateway" target="1.8" />
+      <module name="heima-leadnews-gateways" target="1.8" />
+      <module name="heima-leadnews-model" target="1.8" />
+      <module name="heima-leadnews-service" target="1.8" />
+      <module name="heima-leadnews-services" target="1.8" />
+      <module name="heima-leadnews-test" target="1.8" />
+      <module name="heima-leadnews-utils" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin-gateway" options="-parameters" />
+      <module name="admin-service" options="-parameters" />
+      <module name="heima-exception-spring-boot-starter" options="-parameters" />
+      <module name="heima-knife4j-spring-boot-starter" options="-parameters" />
+      <module name="heima-leadnews" options="-parameters" />
+      <module name="heima-leadnews-basic" options="-parameters" />
+      <module name="heima-leadnews-common" options="-parameters" />
+      <module name="heima-leadnews-feign" options="-parameters" />
+      <module name="heima-leadnews-feign-api" options="-parameters" />
+      <module name="heima-leadnews-gateway" options="-parameters" />
+      <module name="heima-leadnews-gateways" options="-parameters" />
+      <module name="heima-leadnews-model" options="-parameters" />
+      <module name="heima-leadnews-service" options="-parameters" />
+      <module name="heima-leadnews-services" options="-parameters" />
+      <module name="heima-leadnews-test" options="-parameters" />
+      <module name="heima-leadnews-utils" options="-parameters" />
+    </option>
+  </component>
+</project>

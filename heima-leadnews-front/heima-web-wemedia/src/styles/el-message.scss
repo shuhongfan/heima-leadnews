@@ -1,0 +1,31 @@
+.el-message-box {
+  padding-bottom: 30px;
+}
+
+.el-message-box__header {
+  padding: 30px 30px 10px 30px;
+}
+
+.el-message-box__title {
+  color: $--color-text-secondary;
+}
+
+.el-message-box__headerbtn {
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+}
+
+.el-message-box__content {
+  padding: 10px 30px;
+  color: $--color-text-primary;
+}
+
+.el-message-box__btns {
+  padding: 30px 30px 0;
+}
+
+.el-message-box__btns button:nth-child(2) {
+  margin-left: 20px;
+}

@@ -1,0 +1,25 @@
+.el-textarea__inner {
+  background-color: $--background-color-base;
+  border-color: $--background-color-base;
+}
+
+.el-textarea__inner::-webkit-input-placeholder {
+  color: $--color-text-placeholder;
+}
+
+.el-textarea__inner::-ms-input-placeholder {
+    color: $--color-text-placeholder;
+}
+
+.el-textarea__inner::placeholder {
+    color: $--color-text-placeholder;
+}
+
+.el-textarea__inner:hover {
+  border-color: #818693;
+}
+
+.el-textarea__inner:focus {
+  border-color: $--color-primary;
+  color: $--color-text-primary;
+}
