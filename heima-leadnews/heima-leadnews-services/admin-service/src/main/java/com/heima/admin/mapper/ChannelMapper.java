@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.heima.model.admin.pojo.AdChannel;
 
 /**
- * @author mrchen
- * @date 2022/4/21 11:25
+ * 频道管理Mapper
  */
 public interface ChannelMapper extends BaseMapper<AdChannel> {
 }

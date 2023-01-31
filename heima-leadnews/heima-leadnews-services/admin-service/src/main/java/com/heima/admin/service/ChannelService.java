@@ -6,8 +6,7 @@ import com.heima.model.admin.pojo.AdChannel;
 import com.heima.model.common.dtos.ResponseResult;
 
 /**
- * @author mrchen
- * @date 2022/4/21 11:26
+ * 频道管理
  */
 public interface ChannelService extends IService<AdChannel> {
     /**

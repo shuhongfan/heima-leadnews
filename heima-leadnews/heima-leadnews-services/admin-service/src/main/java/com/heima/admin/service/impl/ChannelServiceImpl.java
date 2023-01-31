@@ -21,8 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 /**
- * @author mrchen
- * @date 2022/4/21 11:27
+ * 频道管理
  */
 @Service
 public class ChannelServiceImpl extends ServiceImpl<ChannelMapper, AdChannel> implements ChannelService {
