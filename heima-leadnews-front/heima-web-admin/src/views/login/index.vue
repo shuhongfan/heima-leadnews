@@ -76,23 +76,23 @@ export default {
   },
   methods: {
     async submitForm () {
-      this.$router.replace({ path: '/auth/index' });
-      // try {
-      //   await this.$refs.ruleForm.validate()
-      //   const { password, name } = this.ruleForm
-      //
-      //   const res = await loginByUsername(name, password)
-      //   if (res.code === 0) {
-      //     this.$router.replace({ path: '/auth/index' })
-      //   } else {
-      //     this.$message({
-      //       message: res.errorMessage,
-      //       type: 'error'
-      //     })
-      //   }
-      // } catch (err) {
-      //   console.log('err: ' + err)
-      // }
+      // this.$router.replace({ path: '/auth/index' });
+      try {
+        await this.$refs.ruleForm.validate()
+        const { password, name } = this.ruleForm
+
+        const res = await loginByUsername(name, password)
+        if (res.code === 0) {
+          this.$router.replace({ path: '/auth/index' })
+        } else {
+          this.$message({
+            message: res.errorMessage,
+            type: 'error'
+          })
+        }
+      } catch (err) {
+        console.log('err: ' + err)
+      }
     }
   }
 }

@@ -2,8 +2,10 @@ package com.heima.model.common.dtos;
 
 import com.alibaba.fastjson.JSON;
 import com.heima.model.common.enums.AppHttpCodeEnum;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,8 +17,8 @@ import java.util.Map;
  * 通用的结果返回类
  * @param <T>
  */
-@Setter
-@Getter
+@Data
+@ToString
 public class ResponseResult<T> implements Serializable {
     private String host; // IP
     private Integer code = 200;  // 状态码

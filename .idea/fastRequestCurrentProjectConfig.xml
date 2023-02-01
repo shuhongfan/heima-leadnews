@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="fastRequestCurrentProjectConfig">
+    <option name="domain" value="127.0.0.1:63040" />
+    <option name="enableEnv" value="port" />
+    <option name="enableProject" value="local" />
+  </component>
+</project>

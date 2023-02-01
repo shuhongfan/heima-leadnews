@@ -2473,33 +2473,190 @@ public class AdSensitiveController{
 
 
 
-
-
-**思考面试提问:**
+## 思考面试提问:
 
 **请简单介绍一下你们的项目?**
 
+```
+新闻	资讯	头条
+Toc	 	面向互联网用户
+ToB		面向企业的项目
+运营管理端:管理员登陆这个系统管理相关内容
+自媒体端:自媒体可以在这个系统	发布文章	管理粉丝	管理素材
+app端:互联网用户可以在app端查看最新最热门的资讯
+```
+
+
+
 **你们项目的技术架构是怎样的?**
+
+```
+采用微服务架构搭建
+springBoot + Springcloud (nacos feign ribbon gateway seata sentine1 hystrix )
+spring springMvc mybatisPlus
+
+```
+
+
 
 **你们Springboot及SpringCloud使用的版本?**
 
+```
+springboot 2.3.9
+springcloud Hoxton . SR8
+
+```
+
+
+
 **你是如何理解前后端分离开发的?**
+
+```
+1．前端后端根据需求整理出接口文档
+2．前端后端并行开发
+    后端基于微服务基于接口文档提供接口，提供完毕后通过postman进行接口测试
+    前端实现页面效果，基于mock框架基于接口文档生成模拟数据，进行页面调试
+3．前后端进行联调
+    前端将访问地址改为后台网关地址使用真实数据进行测试
+    如果出现bug谁的问题谁去改
+4．项目上线
+
+```
+
+
 
 **你们后端接口是如何测试的?**
 
+```
+postman进行测试
+swagger + knife4j通过API框架生成接口文档，进行在线调试
+
+```
+
+
+
 **SpringMVC接收参数的注解有哪些?**    @RequestBody  @RequestParam  @PathVaribale
+
+![image-20230131183020666](day01 环境搭建&频道管理.assets/image-20230131183020666.png)
+
+
 
 **你们的接口文档是如何定义的**: 
 
+```
+接口文档;
+接口描述
+1．请求方式GET POST DELETE PUT
+2．请求路径/user/{id}
+3．请求参数
+4．响应内容
+Swagger + knife4j生成的
+@Api描述contro11er类的作用
+@Apioperation描述contro1ler类中方法的作用，web接口
+@ApiMode1Properties描述属性的作用
+
+```
+
+
+
 **你们项目的数据库设计情况？ 你是否有独立设计过数据库?**
+
+```
+微服务架构―按照业务拆分的数据库
+admin微服务==>admin数据库
+wemedia微服务==> wemedia自媒体库
+article微服务==>article文章库
+user微服务==>user 用户库
+
+冗余的设计:
+微服务为了降低关联查询在表会添加冗余字段
+user
+orderuserId
+name冗余字段
+
+```
+
+
 
 **能否说出SpringBoot的自动装配原理?**
 
+```
+aspringBootApp1ication
+@springBootconfiguration启动类也是一个配置类
+@componentscan组件默认扫描启动类所在的包
+EnableAutoconfiguration开启自动状态
+@AutoConfigurationPackage自动配置当前工程相关组件
+@Import(AutoconfigurationImportselector.class)
+查询相关依赖jar包==>META-INF/spring.factories ==>读取key为Enab7eAutoconfiguration的所有配置类的全限定类名:
+上面读到的类都是候选配置，有非常多
+1．去除重复的配置
+2．去除手动排除的配置
+3．过滤掉不满足条件的配置@conditiona1onxXX条件
+剩余的配置就是要加载的配置类
+
+```
+
+
+
 **项目中是否自定义过starter起步依赖，如何定义?**
+
+```
+定义过
+统一异常
+统一接口文档
+写好配置类
+准备好META-INF/spring.factories就可以了
+
+```
+
+
 
 **项目中异常是怎么处理的?**
 
+```
+采用全局异常处理
+@contro1lerAdvice contro1ler的增强注解
+@ExceptionHandler异常处理器
+具体步骤:
+1.声明一个类	类上添加@contro71erAdvice
+2.类中创建方法	方法上添加@ExceptionHandler(Exception.class)
+3．方法中返回默认的 ResponseResult 统一错误的结果
+
+```
+
+
+
 **项目中注册中心的作用?**
 
+```
+注册中心nacos
+服务注册
+服务发现
+服务状态监控
+配置中心nacos
+配置的统一管理
+共享配置:配置中通过shared-configs 配置共享配置
+
+```
+
+
+
 **项目中api网关的作用?**
+
+```
+微服务的统一入口，可以实现路由
+鉴权
+限流―过滤
+
+```
+
+**如何进行前后端联调?**
+
+```
+F12==>network ==>请求路径==>请求参数==>响应状态==>响应结果
+后端Debug—步步排查
+
+```
+
+
 

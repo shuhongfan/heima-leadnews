@@ -22,6 +22,9 @@ public class PageRequestDTO {
     protected Integer page;
 
 
+    /**
+     * 检查参数
+     */
     public void checkParam() {
         if (this.page == null || this.page <= 0) {
             setPage(1);
