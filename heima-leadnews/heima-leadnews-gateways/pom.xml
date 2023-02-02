@@ -12,8 +12,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>admin-gateway</module>
+        <module>wemedia-gateway</module>
     </modules>
     <dependencies>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

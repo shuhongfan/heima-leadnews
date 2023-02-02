@@ -1,4 +1,4 @@
-package com.heima.user.controller;
+package com.heima.user.controller.v1;
 
 import com.heima.common.constants.admin.AdminConstants;
 import com.heima.model.common.dtos.ResponseResult;

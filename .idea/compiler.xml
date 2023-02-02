@@ -7,15 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="aliyun-oss-demo" />
         <module name="wemedia-service" />
+        <module name="heima-file-spring-boot-starter" />
         <module name="admin-gateway" />
+        <module name="heima-exception-spring-boot-starter" />
+        <module name="user-service" />
         <module name="article-service" />
         <module name="heima-leadnews-utils" />
         <module name="heima-knife4j-spring-boot-starter" />
-        <module name="heima-exception-spring-boot-starter" />
         <module name="heima-leadnews-common" />
-        <module name="user-service" />
         <module name="heima-leadnews-model" />
+        <module name="wemedia-gateway" />
         <module name="heima-leadnews-feign" />
         <module name="admin-service" />
       </profile>
@@ -30,8 +33,10 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="admin-gateway" options="-parameters" />
       <module name="admin-service" options="-parameters" />
+      <module name="aliyun-oss-demo" options="-parameters" />
       <module name="article-service" options="-parameters" />
       <module name="heima-exception-spring-boot-starter" options="-parameters" />
+      <module name="heima-file-spring-boot-starter" options="-parameters" />
       <module name="heima-knife4j-spring-boot-starter" options="-parameters" />
       <module name="heima-leadnews" options="-parameters" />
       <module name="heima-leadnews-basic" options="-parameters" />
@@ -46,6 +51,7 @@
       <module name="heima-leadnews-test" options="-parameters" />
       <module name="heima-leadnews-utils" options="-parameters" />
       <module name="user-service" options="-parameters" />
+      <module name="wemedia-gateway" options="-parameters" />
       <module name="wemedia-service" options="-parameters" />
     </option>
   </component>

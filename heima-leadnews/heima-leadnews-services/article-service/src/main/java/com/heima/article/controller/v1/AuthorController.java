@@ -1,4 +1,4 @@
-package com.heima.article.controller;
+package com.heima.article.controller.v1;
 
 import com.heima.article.service.AuthorService;
 import com.heima.model.article.pojos.ApAuthor;

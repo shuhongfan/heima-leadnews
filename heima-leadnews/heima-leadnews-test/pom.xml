@@ -7,6 +7,9 @@
         <groupId>com.heima</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <modules>
+        <module>aliyun-oss-demo</module>
+    </modules>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>heima-leadnews-test</artifactId>
     <packaging>pom</packaging>
