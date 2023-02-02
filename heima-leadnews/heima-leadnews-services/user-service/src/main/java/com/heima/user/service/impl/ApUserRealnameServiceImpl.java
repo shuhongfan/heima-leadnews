@@ -20,6 +20,7 @@ import com.heima.model.wemedia.pojos.WmUser;
 import com.heima.user.mapper.ApUserMapper;
 import com.heima.user.mapper.ApUserRealnameMapper;
 import com.heima.user.service.ApUserRealnameService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +74,8 @@ public class ApUserRealnameServiceImpl extends ServiceImpl<ApUserRealnameMapper,
      * @param status  2 审核失败   9 审核成功
      * @return
      */
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
+    @GlobalTransactional(rollbackFor = Exception.class) //在实名认证审核的方法上，加上seata提供的全局事务管理注解 @GlobalTransactional 注解， 开启全局事务
     @Override
     public ResponseResult updateStatusById(AuthDTO dto, Short status) {
 //        1.校验参数 （实名认证id 不能为空）
@@ -116,6 +118,11 @@ public class ApUserRealnameServiceImpl extends ServiceImpl<ApUserRealnameMapper,
 
 //        9. 创建作者信息(查询是否创建过,开通账户)
         createApAuthor(apUser, wmUser);
+
+//        if (dto.getId().intValue() == 5) {
+//            CustException.cust(AppHttpCodeEnum.PARAM_INVALID,"演示异常，用来演示分布式事务问题");
+//        }
+
         return ResponseResult.okResult();
     }
 

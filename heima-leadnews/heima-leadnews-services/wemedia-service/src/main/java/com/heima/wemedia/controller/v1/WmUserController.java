@@ -1,7 +1,8 @@
-package com.heima.wemedia.controller;
+package com.heima.wemedia.controller.v1;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.wemedia.dtos.WmUserDTO;
 import com.heima.model.wemedia.pojos.WmUser;
 import com.heima.wemedia.mapper.WmUserMapper;
 import com.heima.wemedia.service.WmUserService;
@@ -30,4 +31,5 @@ public class WmUserController {
     public ResponseResult<WmUser> findByName(@PathVariable("name") String name) {
         return wmUserService.findByName(name);
     }
+
 }

@@ -17,6 +17,7 @@
         <module>heima-leadnews-gateways</module>
         <module>heima-leadnews-feign</module>
         <module>heima-leadnews-test</module>
+        <module>heima-leadnews-basic/heima-file-spring-boot-starter</module>
     </modules>
     <!-- 继承Spring boot工程 -->
     <parent>
