@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.wemedia.mapper.WmMaterialMapper">
+    <select id="selectRelationsIds" resultType="Integer">
+        select id from wm_material
+        <where>
+            url IN
+            <foreach item="url" collection="urls" open="(" close=")" separator=",">
+                #{url}
+            </foreach>
+            and user_id = #{userId}
+        </where>
+    </select>
+</mapper>

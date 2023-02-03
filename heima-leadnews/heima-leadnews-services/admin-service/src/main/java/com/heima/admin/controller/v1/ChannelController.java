@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author mrchen
  * @date 2022/4/21 11:45
@@ -46,5 +48,12 @@ public class ChannelController {
     @GetMapping("/del/{id}")
     public ResponseResult delete(@PathVariable("id") Integer id){
         return channelService.deleteById(id);
+    }
+
+    @ApiOperation("查询全部频道")
+    @GetMapping("/channels")
+    public ResponseResult findAll() {
+        List<AdChannel> list = channelService.list();
+        return ResponseResult.okResult(list);
     }
 }

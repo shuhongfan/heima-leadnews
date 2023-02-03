@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heima.wemedia.mapper.WmNewsMaterialMapper">
+<!--    保存文章和素材的关联关系-->
+    <insert id="saveRelations">
+        insert into wm_news_material(material_id,news_id,type,ord)
+        values 
+            <foreach collection="wmMaterialIds" separator="," item="materialId" index="ord">
+                (#{materialId},#{newsId},#{type},#{ord})
+            </foreach>
+    </insert>
+
+    <!--    根据素材资源路径，查询相关素材id-->
+    <select id="selectRelationsIds" resultType="java.lang.Integer">
+        select id from wm_material
+        <where>
+            url in
+            <foreach collection="urls" item="url" open="(" close=")" separator=",">
+                #{url}
+            </foreach>
+        </where>
+    </select>
+</mapper>
