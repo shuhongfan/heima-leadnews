@@ -17,36 +17,37 @@ import java.util.List;
  * @author mrchen
  * @date 2022/4/21 11:45
  */
-@Api(value = "频道管理controller",tags = "频道管理controller")
+@Api(value = "频道管理controller", tags = "频道管理controller")
 @RestController // @Controller    @ResponseBody ==> json
 @RequestMapping("/api/v1/channel")
 public class ChannelController {
     @Autowired
     private ChannelService channelService;
 
-    @ApiOperation(value = "根据条件分页查询频道信息",notes = "条件 频道名称 状态 以ord升序查询频道")
+    @ApiOperation(value = "根据条件分页查询频道信息", notes = "条件 频道名称 状态 以ord升序查询频道")
     @ApiImplicitParams(
-            @ApiImplicitParam(value = "dto",dataType = "ChannelDTO",required = true)
+            @ApiImplicitParam(value = "dto", dataType = "ChannelDTO", required = true)
     )
     @PostMapping("/list")
-    public ResponseResult list(@RequestBody ChannelDTO dto){
+    public ResponseResult list(@RequestBody ChannelDTO dto) {
         return channelService.findByNameAndPage(dto);
     }
+
     @ApiOperation(value = "保存频道信息")
     @PostMapping("/save")
-    public ResponseResult save(@RequestBody AdChannel channel){
+    public ResponseResult save(@RequestBody AdChannel channel) {
         return channelService.insert(channel);
     }
 
     @ApiOperation(value = "修改频道信息")
     @PostMapping("/update")
-    public ResponseResult update(@RequestBody AdChannel channel){
+    public ResponseResult update(@RequestBody AdChannel channel) {
         return channelService.update(channel);
     }
 
     @ApiOperation(value = "删除频道信息")
     @GetMapping("/del/{id}")
-    public ResponseResult delete(@PathVariable("id") Integer id){
+    public ResponseResult delete(@PathVariable("id") Integer id) {
         return channelService.deleteById(id);
     }
 
@@ -56,4 +57,11 @@ public class ChannelController {
         List<AdChannel> list = channelService.list();
         return ResponseResult.okResult(list);
     }
+
+    @ApiOperation("根据id查询频道")
+    @GetMapping("/one/{id}")
+    public ResponseResult findOne(@PathVariable Integer id) {
+        return ResponseResult.okResult(channelService.getById(id));
+    }
+
 }

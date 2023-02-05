@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.heima.common.constants.message.NewsAutoScanConstants;
+import com.heima.common.constants.message.NewsUpOrDownConstants;
+import com.heima.common.constants.message.PublishArticleConstants;
 import com.heima.common.constants.wemedia.WemediaConstants;
 import com.heima.common.exception.CustException;
 import com.heima.model.common.dtos.PageResponseResult;
@@ -28,6 +30,10 @@ import com.heima.wemedia.mapper.WmUserMapper;
 import com.heima.wemedia.service.WmNewsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +41,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -262,6 +269,26 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
 //        4.修改文章状态 同步到APP端
         update(Wrappers.<WmNews>lambdaUpdate().eq(WmNews::getId, wmNews.getId())
                 .set(WmNews::getEnable, dto.getEnable()));
+
+        //5. 上下架发送消息通知  用于同步article 及 elasticsearch
+        if (WemediaConstants.WM_NEWS_UP.equals(dto.getEnable())) {
+//            上架
+            rabbitTemplate.convertAndSend(
+                    NewsUpOrDownConstants.NEWS_UP_OR_DOWN_EXCHANGE,
+                    NewsUpOrDownConstants.NEWS_UP_ROUTE_KEY,
+                    wmNews.getArticleId()
+            );
+            log.info("成功发送文章 上架消息 文章id:{}", wmNews.getArticleId());
+        } else {
+//            下架
+            rabbitTemplate.convertAndSend(
+                    NewsUpOrDownConstants.NEWS_UP_OR_DOWN_EXCHANGE,
+                    NewsUpOrDownConstants.NEWS_DOWN_ROUTE_KEY,
+                    wmNews.getArticleId()
+            );
+            log.info("成功发送文章 下架消息 文章id:{}", wmNews.getArticleId());
+        }
+
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 
@@ -358,6 +385,34 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         updateById(wmNews);
 
 //        定时发布文章
+        if (status.shortValue() == WmNews.Status.ADMIN_SUCCESS.getCode()) {
+            //        获取发布时间
+            long publishTime = wmNews.getPublishTime().getTime();
+
+//        获取当前时间
+            long nowTime = System.currentTimeMillis();
+
+//        发布时间 -  当前时间 = 距离发布的延迟时间
+            long remainTime = publishTime - nowTime;
+
+//        使用rabbittemplate发送延迟消息
+            rabbitTemplate.convertAndSend(
+                    PublishArticleConstants.DELAY_DIRECT_EXCHANGE,
+                    PublishArticleConstants.PUBLISH_ARTICLE_ROUTE_KEY,
+                    wmNews.getId(),
+                    new MessagePostProcessor() {
+                        @Override
+                        public Message postProcessMessage(Message message) throws AmqpException {
+                            MessageProperties messageProperties = message.getMessageProperties();
+//                        设置消息头
+                            messageProperties.setHeader("x-delay", remainTime <= 0 ? 0 : remainTime);
+                            return message;
+                        }
+                    }
+            );
+            log.info("成功发送 文章延迟发布消息  文章id:{}  当前时间:{}", wmNews.getId(), LocalDateTime.now());
+        }
+
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 

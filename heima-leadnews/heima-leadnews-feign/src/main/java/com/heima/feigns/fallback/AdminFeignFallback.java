@@ -18,6 +18,13 @@ public class AdminFeignFallback implements FallbackFactory<AdminFeign> {
                 log.error("AdminFeign sensitives 远程调用出错啦 ~~~ !!!! {} ",throwable.getMessage());
                 return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);
             }
+
+            @Override
+            public ResponseResult findOne(Integer id) {
+                log.info("参数: {}",id);
+                log.error("AdminFeign findOne 远程调用出错啦 ~~~ !!!! {} ",throwable.getMessage());
+                return ResponseResult.errorResult(AppHttpCodeEnum.REMOTE_SERVER_ERROR);
+            }
         };
     }
 }

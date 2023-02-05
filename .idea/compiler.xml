@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="aliyun-oss-demo" />
+        <module name="freemarker-demo" />
         <module name="aliyun-safe-demo" />
         <module name="wemedia-service" />
         <module name="heima-file-spring-boot-starter" />
@@ -38,6 +39,7 @@
       <module name="aliyun-oss-demo" options="-parameters" />
       <module name="aliyun-safe-demo" options="-parameters" />
       <module name="article-service" options="-parameters" />
+      <module name="freemarker-demo" options="-parameters" />
       <module name="heima-aliyunsecurity-spring-boot-starter" options="-parameters" />
       <module name="heima-exception-spring-boot-starter" options="-parameters" />
       <module name="heima-file-spring-boot-starter" options="-parameters" />

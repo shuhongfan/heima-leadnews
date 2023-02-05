@@ -3,6 +3,7 @@ package com.heima.wemedia.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.heima.aliyun.scan.GreenScan;
 import com.heima.aliyun.scan.ScanResult;
+import com.heima.common.constants.message.PublishArticleConstants;
 import com.heima.common.constants.wemedia.WemediaConstants;
 import com.heima.common.exception.CustException;
 import com.heima.feigns.AdminFeign;
@@ -14,12 +15,17 @@ import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.service.WmNewsAutoScanService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +48,8 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
     @Autowired
     private GreenScan greenScan;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * 自媒体文章审核
@@ -97,7 +105,31 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
         updateWmNews(WmNews.Status.SUCCESS.getCode(), "审核成功",wmNews);
 
 //        9. 根据文章的发布时间，发送延迟消息，用于定时发布文章
+//        获取发布时间
+        long publishTime = wmNews.getPublishTime().getTime();
 
+//        获取当前时间
+        long nowTime = System.currentTimeMillis();
+
+//        发布时间 -  当前时间 = 距离发布的延迟时间
+        long remainTime = publishTime - nowTime;
+
+//        使用rabbittemplate发送延迟消息
+        rabbitTemplate.convertAndSend(
+                PublishArticleConstants.DELAY_DIRECT_EXCHANGE,
+                PublishArticleConstants.PUBLISH_ARTICLE_ROUTE_KEY,
+                wmNews.getId(),
+                new MessagePostProcessor() {
+                    @Override
+                    public Message postProcessMessage(Message message) throws AmqpException {
+                        MessageProperties messageProperties = message.getMessageProperties();
+//                        设置消息头
+                        messageProperties.setHeader("x-delay", remainTime <= 0 ? 0 : remainTime);
+                        return message;
+                    }
+                }
+        );
+        log.info("成功发送 文章延迟发布消息  文章id:{}  当前时间:{}", wmNews.getId(), LocalDateTime.now());
     }
 
     /**

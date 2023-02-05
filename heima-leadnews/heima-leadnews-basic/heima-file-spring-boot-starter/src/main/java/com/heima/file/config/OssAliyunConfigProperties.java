@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class OssAliyunConfigProperties implements Serializable {
     /***
      * 站点
-     *
+     * webSite + /meinv/meinv001.jpg
      */
     private String webSite;
 

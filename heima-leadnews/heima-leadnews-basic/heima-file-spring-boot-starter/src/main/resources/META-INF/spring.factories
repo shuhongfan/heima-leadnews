@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.heima.file.service.impl.OSSAliyunFileStorageService
+ com.heima.file.service.impl.OSSAliyunFileStorageService,com.heima.file.service.impl.MinIOFileStorageService

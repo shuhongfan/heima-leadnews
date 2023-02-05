@@ -10,6 +10,7 @@
     <modules>
         <module>aliyun-oss-demo</module>
         <module>aliyun-safe-demo</module>
+        <module>freemarker-demo</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>heima-leadnews-test</artifactId>
