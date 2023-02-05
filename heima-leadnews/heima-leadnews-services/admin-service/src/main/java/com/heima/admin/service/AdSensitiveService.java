@@ -6,6 +6,8 @@ import com.heima.model.admin.pojo.AdSensitive;
 import com.heima.model.common.dtos.ResponseResult;
 import io.swagger.models.auth.In;
 
+import java.util.List;
+
 /**
  * 敏感词管理
  */
@@ -39,4 +41,10 @@ public interface AdSensitiveService extends IService<AdSensitive> {
      * @return
      */
     public ResponseResult delete(Integer id);
+
+    /**
+     * 查询敏感词内容列表
+     * @return
+     */
+    public ResponseResult<List<String>> selectAllSensitives();
 }

@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="aliyun-oss-demo" />
+        <module name="aliyun-safe-demo" />
         <module name="wemedia-service" />
         <module name="heima-file-spring-boot-starter" />
         <module name="admin-gateway" />
@@ -19,6 +20,7 @@
         <module name="heima-leadnews-common" />
         <module name="heima-leadnews-model" />
         <module name="wemedia-gateway" />
+        <module name="heima-aliyunsecurity-spring-boot-starter" />
         <module name="heima-leadnews-feign" />
         <module name="admin-service" />
       </profile>
@@ -34,7 +36,9 @@
       <module name="admin-gateway" options="-parameters" />
       <module name="admin-service" options="-parameters" />
       <module name="aliyun-oss-demo" options="-parameters" />
+      <module name="aliyun-safe-demo" options="-parameters" />
       <module name="article-service" options="-parameters" />
+      <module name="heima-aliyunsecurity-spring-boot-starter" options="-parameters" />
       <module name="heima-exception-spring-boot-starter" options="-parameters" />
       <module name="heima-file-spring-boot-starter" options="-parameters" />
       <module name="heima-knife4j-spring-boot-starter" options="-parameters" />

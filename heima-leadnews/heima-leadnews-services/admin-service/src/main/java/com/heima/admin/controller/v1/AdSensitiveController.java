@@ -41,4 +41,9 @@ public class AdSensitiveController {
         return adSensitiveService.delete(id);
     }
 
+    @ApiOperation(value = "查询敏感词内容list")
+    @PostMapping("/sensitives")
+    public ResponseResult sensitives() {
+        return adSensitiveService.selectAllSensitives();
+    }
 }

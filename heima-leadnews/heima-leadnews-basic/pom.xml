@@ -13,5 +13,6 @@
     <modules>
         <module>heima-knife4j-spring-boot-starter</module>
         <module>heima-exception-spring-boot-starter</module>
+        <module>heima-aliyunsecurity-spring-boot-starter</module>
     </modules>
 </project>

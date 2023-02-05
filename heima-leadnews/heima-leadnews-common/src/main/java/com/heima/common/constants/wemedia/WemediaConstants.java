@@ -22,4 +22,7 @@ public class WemediaConstants {
     // 文章上下架状态
     public static final Short WM_NEWS_UP = 1; // 上架
     public static final Short WM_NEWS_DOWN = 0; // 下架
+
+    public static final Short WM_NEWS_AUTH_PASS = 4;
+    public static final Short WM_NEWS_AUTH_FAIL = 2;
 }

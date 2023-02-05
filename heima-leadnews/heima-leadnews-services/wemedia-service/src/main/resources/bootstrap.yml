@@ -22,4 +22,13 @@ spring:
             refresh: false   # 是否动态刷新，默认为fals
           - data-id: share-file.yml # 配置文件名-Data Id
             group: DEFAULT_GROUP   # 默认为DEFAULT_GROUP
-            refresh: false   # 是否动态刷新，默认为false
+            refresh: false   # 是否动态刷新，默认为fals
+          - data-id: share-rabbit.yml # 配置文件名-Data Id
+            group: DEFAULT_GROUP   # 默认为DEFAULT_GROUP
+            refresh: false   # 是否动态刷新，默认为fals
+  servlet:
+    multipart:
+      max-file-size: 5MB
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

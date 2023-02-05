@@ -144,4 +144,14 @@ public class AdSensitiveServiceImpl extends ServiceImpl<AdSensitiveMapper, AdSen
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
     }
 
+    /**
+     * 查询敏感词内容列表
+     * @return
+     */
+    @Override
+    public ResponseResult<List<String>> selectAllSensitives() {
+        List<String> allSensitives = adSensitiveMapper.findAllSensitives();
+        return ResponseResult.okResult(allSensitives);
+    }
+
 }
