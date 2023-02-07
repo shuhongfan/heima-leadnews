@@ -7,10 +7,13 @@ import com.heima.article.mapper.ApArticleContentMapper;
 import com.heima.article.mapper.ApArticleMapper;
 import com.heima.article.mapper.AuthorMapper;
 import com.heima.article.service.ApArticleService;
+import com.heima.article.service.GeneratePageService;
+import com.heima.common.constants.article.ArticleConstants;
 import com.heima.common.exception.CustException;
 import com.heima.feigns.AdminFeign;
 import com.heima.feigns.WemediaFeign;
 import com.heima.model.admin.pojo.AdChannel;
+import com.heima.model.article.dtos.ArticleHomeDTO;
 import com.heima.model.article.pojos.ApArticle;
 import com.heima.model.article.pojos.ApArticleConfig;
 import com.heima.model.article.pojos.ApArticleContent;
@@ -20,10 +23,17 @@ import com.heima.model.common.enums.AppHttpCodeEnum;
 import com.heima.model.wemedia.pojos.WmNews;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -44,13 +54,25 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
     @Autowired
     private ApArticleContentMapper apArticleContentMapper;
 
+    @Autowired
+    private ApArticleMapper apArticleMapper;
+
+    @Autowired
+    private GeneratePageService generatePageService;
+
+    @Value("${file.oss.web-site}")
+    private String webSite;
+
+    @Value("${file.minio.readPath}")
+    private String readPath;
+
     /**
      * 保存或修改文章
      * @param newsId 文章id
      * @return
      */
     @Override
-    @GlobalTransactional(rollbackFor = Exception.class,timeoutMills = 3000000)
+    @GlobalTransactional(rollbackFor = Exception.class, timeoutMills = 3000000)
     public void publishArticle(Integer newsId) {
 //        1.根据id查询并校验自媒体文章
         WmNews wmNews = getWmNews(newsId);
@@ -65,12 +87,69 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
         saveConfigAndContent(wmNews, apArticle);
 
 //        5. 基于新的文章内容生成HTML静态页
+        generatePageService.generateArticlePage(wmNews.getContent(), apArticle);
 
 //        6. 更新wmNews状态为9
         updateWmNews(wmNews, apArticle);
 
 //        7. 通过es 更新索引库
 
+    }
+
+    /**
+     * 根据参数加载文章列表
+     * @param loadtype 0为加载更多  1为加载最新
+     * @param dto
+     * @return
+     */
+    @Override
+    public ResponseResult load(Short loadtype, ArticleHomeDTO dto) {
+//        1. 检查参数：（分页 时间  类型  频道）
+        Integer size = dto.getSize();
+        if (size == null || size <= 0) { // 页大小
+            dto.setSize(10);
+        }
+
+        // 时间
+        if (dto.getMaxBehotTime() == null) {
+            dto.setMaxBehotTime(new Date());
+        }
+
+        if (dto.getMinBehotTime() == null) {
+            dto.setMinBehotTime(new Date());
+        }
+
+        // 频道
+        if (StringUtils.isBlank(dto.getTag())) {
+            dto.setTag(ArticleConstants.DEFAULT_TAG);
+        }
+
+        // 类型判断
+        if (!loadtype.equals(ArticleConstants.LOADTYPE_LOAD_NEW) && !loadtype.equals(ArticleConstants.LOADTYPE_LOAD_MORE)) {
+            loadtype = ArticleConstants.LOADTYPE_LOAD_MORE;
+        }
+
+//        2.调用mapper查询
+        List<ApArticle> articleList = apArticleMapper.loadArticleList(dto, loadtype);
+
+//        3. 返回结果 (封面需要拼接访问前缀)
+        for (ApArticle article : articleList) {
+            String images = article.getImages();
+            if (StringUtils.isNotBlank(images)) {
+                images=Arrays.stream(images.split(","))
+                        // 每一个路径添加前缀
+                        .map(item -> webSite + item)
+                        // 将加了前缀的路径  拼接成字符串
+                        .collect(Collectors.joining(","));
+                article.setImages(images);
+            }
+
+//            给静态页路径添加访问前缀
+            article.setStaticUrl(readPath + article.getStaticUrl());
+        }
+        //3 返回结果
+        ResponseResult result = ResponseResult.okResult(articleList);
+        return result;
     }
 
     /**
@@ -99,24 +178,25 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
      * @param apArticle
      */
     private void saveConfigAndContent(WmNews wmNews, ApArticle apArticle) {
-//        1. 保存配置
-        ApArticleConfig apArticleConfig = new ApArticleConfig();
-        apArticleConfig.setArticleId(apArticle.getId());
-//        是否允许评论
-        apArticleConfig.setIsComment(true);
-//        是否允许转发
-        apArticleConfig.setIsForward(true);
-//        是否 下架
-        apArticleConfig.setIsDown(false);
-//        是否 删除
-        apArticleConfig.setIsDelete(false);
-        apArticleConfigMapper.insert(apArticleConfig);
+        // 1. 保存配置
+        ApArticleConfig config = new ApArticleConfig();
+        config.setArticleId(apArticle.getId());
 
-//        2. 文章设置
-        ApArticleContent apArticleContent = new ApArticleContent();
-        apArticleContent.setArticleId(apArticle.getId());
-        apArticleContent.setContent(wmNews.getContent());
-        apArticleContentMapper.insert(apArticleContent);
+        // 是否允许评论
+        config.setIsComment(true);
+        // 是否允许转发
+        config.setIsForward(true);
+        // 是否 下架
+        config.setIsDown(false);
+        // 是否 删除
+        config.setIsDelete(false);
+        apArticleConfigMapper.insert(config);
+
+        // 2. 保存文章详情
+        ApArticleContent content = new ApArticleContent();
+        content.setArticleId(apArticle.getId());
+        content.setContent(wmNews.getContent());
+        apArticleContentMapper.insert(content);
     }
 
     /**
@@ -187,7 +267,7 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
             CustException.cust(AppHttpCodeEnum.DATA_NOT_EXIST, "关联的作者信息不存在");
         }
         apArticle.setAuthorId(apAuthor.getId().longValue());
-        apArticle.setAuthorName(apArticle.getAuthorName());
+        apArticle.setAuthorName(apAuthor.getName());
 
         return apArticle;
     }

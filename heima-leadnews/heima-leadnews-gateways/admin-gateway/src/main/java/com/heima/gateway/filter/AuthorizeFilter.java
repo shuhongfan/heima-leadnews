@@ -38,6 +38,7 @@ public class AuthorizeFilter implements GlobalFilter {
     static {
         urlList.add("/login/in");
         urlList.add("/v2/api-docs");
+        urlList.add("/login_auth/");
     }
 
     /**

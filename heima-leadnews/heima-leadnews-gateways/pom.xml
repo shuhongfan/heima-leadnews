@@ -13,6 +13,7 @@
     <modules>
         <module>admin-gateway</module>
         <module>wemedia-gateway</module>
+        <module>app-gateway</module>
     </modules>
     <dependencies>
         <dependency>
