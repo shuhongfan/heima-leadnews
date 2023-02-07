@@ -15,6 +15,7 @@
         <module name="admin-gateway" />
         <module name="heima-exception-spring-boot-starter" />
         <module name="user-service" />
+        <module name="app-gateway" />
         <module name="article-service" />
         <module name="heima-leadnews-utils" />
         <module name="heima-knife4j-spring-boot-starter" />
@@ -38,6 +39,7 @@
       <module name="admin-service" options="-parameters" />
       <module name="aliyun-oss-demo" options="-parameters" />
       <module name="aliyun-safe-demo" options="-parameters" />
+      <module name="app-gateway" options="-parameters" />
       <module name="article-service" options="-parameters" />
       <module name="freemarker-demo" options="-parameters" />
       <module name="heima-aliyunsecurity-spring-boot-starter" options="-parameters" />

@@ -13,7 +13,7 @@ public class PublishArticleTest {
 
     @Test
     public void publishArticle() {
-        apArticleService.publishArticle(6271);
+        apArticleService.publishArticle(6278);
     }
 
 }
