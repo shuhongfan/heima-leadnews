@@ -1,6 +1,8 @@
 package com.heima.admin.controller.v1;
 
 import com.heima.admin.service.ChannelService;
+import com.heima.model.common.validator.ValidatorAdd;
+import com.heima.model.common.validator.ValidatorUpdate;
 import com.heima.model.admin.dtos.ChannelDTO;
 import com.heima.model.admin.pojo.AdChannel;
 import com.heima.model.common.dtos.ResponseResult;
@@ -9,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,13 +38,13 @@ public class ChannelController {
 
     @ApiOperation(value = "保存频道信息")
     @PostMapping("/save")
-    public ResponseResult save(@RequestBody AdChannel channel) {
+    public ResponseResult save(@RequestBody @Validated({ValidatorAdd.class}) AdChannel channel) {
         return channelService.insert(channel);
     }
 
     @ApiOperation(value = "修改频道信息")
     @PostMapping("/update")
-    public ResponseResult update(@RequestBody AdChannel channel) {
+    public ResponseResult update(@RequestBody @Validated({ValidatorUpdate.class}) AdChannel channel) {
         return channelService.update(channel);
     }
 

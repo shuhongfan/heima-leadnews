@@ -15,11 +15,13 @@
         <module name="admin-gateway" />
         <module name="heima-exception-spring-boot-starter" />
         <module name="user-service" />
+        <module name="mongodb-test" />
         <module name="app-gateway" />
         <module name="article-service" />
         <module name="heima-leadnews-utils" />
         <module name="heima-knife4j-spring-boot-starter" />
         <module name="heima-leadnews-common" />
+        <module name="behavior-service" />
         <module name="heima-leadnews-model" />
         <module name="wemedia-gateway" />
         <module name="heima-aliyunsecurity-spring-boot-starter" />
@@ -41,6 +43,7 @@
       <module name="aliyun-safe-demo" options="-parameters" />
       <module name="app-gateway" options="-parameters" />
       <module name="article-service" options="-parameters" />
+      <module name="behavior-service" options="-parameters" />
       <module name="freemarker-demo" options="-parameters" />
       <module name="heima-aliyunsecurity-spring-boot-starter" options="-parameters" />
       <module name="heima-exception-spring-boot-starter" options="-parameters" />
@@ -58,6 +61,7 @@
       <module name="heima-leadnews-services" options="-parameters" />
       <module name="heima-leadnews-test" options="-parameters" />
       <module name="heima-leadnews-utils" options="-parameters" />
+      <module name="mongodb-test" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="wemedia-gateway" options="-parameters" />
       <module name="wemedia-service" options="-parameters" />

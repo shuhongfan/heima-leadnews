@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://192.168.200.130:3306?createDatabaseIfNotExist=true&amp;useSSL=false</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@192.168.200.130 [2]" uuid="db600abd-e238-4760-a54e-2a4e569bc379">
+      <driver-ref>mongo</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
+      <jdbc-url>mongodb://192.168.200.130:27017</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

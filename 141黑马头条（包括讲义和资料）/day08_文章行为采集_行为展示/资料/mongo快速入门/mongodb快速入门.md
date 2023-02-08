@@ -356,7 +356,7 @@ public class ApComment {
 ```java
 package com.itheima.mongo;
 
-import com.itheima.mongo.pojo.ApComment;
+import pojo.com.heima.mongo.ApComment;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import org.junit.jupiter.api.Test;

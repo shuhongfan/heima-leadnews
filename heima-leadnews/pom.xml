@@ -18,6 +18,7 @@
         <module>heima-leadnews-feign</module>
         <module>heima-leadnews-test</module>
         <module>heima-leadnews-basic/heima-file-spring-boot-starter</module>
+        <module>heima-leadnews-services/behavior-service</module>
     </modules>
     <!-- 继承Spring boot工程 -->
     <parent>
