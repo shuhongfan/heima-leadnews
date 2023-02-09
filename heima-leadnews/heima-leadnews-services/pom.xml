@@ -16,6 +16,7 @@
         <module>user-service</module>
         <module>wemedia-service</module>
         <module>article-service</module>
+        <module>comment-service</module>
     </modules>
 
     <dependencies>
