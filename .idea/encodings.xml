@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-exception-spring-boot-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-file-spring-boot-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-knife4j-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-schedule-spring-boot-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/src/main/resources" charset="UTF-8" />
@@ -33,8 +34,10 @@
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/aliyun-safe-demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/freemarker-demo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/mongodb-test/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/springtask-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-test/xxljob-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-utils/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-utils/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/heima-leadnews/src/main/java" charset="UTF-8" />

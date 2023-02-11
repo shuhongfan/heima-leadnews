@@ -1,8 +1,10 @@
 package com.heima.comment.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.heima.aliyun.scan.GreenScan;
 import com.heima.aliyun.scan.ScanResult;
 import com.heima.comment.service.CommentService;
+import com.heima.common.constants.article.HotArticleConstants;
 import com.heima.common.exception.CustException;
 import com.heima.feigns.UserFeign;
 import com.heima.model.article.pojos.ApArticle;
@@ -14,11 +16,17 @@ import com.heima.model.comment.pojos.ApCommentLike;
 import com.heima.model.comment.vos.ApCommentVo;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.model.message.app.NewBehaviorDTO;
 import com.heima.model.threadlocal.AppThreadLocalUtils;
 import com.heima.model.user.pojos.ApUser;
 import com.heima.model.wemedia.pojos.WmNews;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.checkerframework.checker.units.qual.A;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -37,6 +45,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
@@ -48,6 +57,11 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private GreenScan greenScan;
 
+    @Autowired
+    private RedissonClient redissonClient;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * 保存评论
@@ -115,6 +129,15 @@ public class CommentServiceImpl implements CommentService {
 
         mongoTemplate.save(apComment);
 
+        //        发送行为消息
+        NewBehaviorDTO newBehaviorDTO = new NewBehaviorDTO();
+        newBehaviorDTO.setType(NewBehaviorDTO.BehaviorType.COMMENT);
+        newBehaviorDTO.setArticleId(dto.getArticleId());
+        newBehaviorDTO.setAdd(1);
+
+        rabbitTemplate.convertAndSend(HotArticleConstants.HOT_ARTICLE_SCORE_BEHAVIOR_QUEUE, JSON.toJSONString(newBehaviorDTO));
+        log.info("发送成功 文章评论行为消息，消息内容：{}", newBehaviorDTO);
+
         return ResponseResult.okResult();
     }
 
@@ -139,36 +162,43 @@ public class CommentServiceImpl implements CommentService {
         }
 
 //        3. 如果是点赞操作 判断是否已经点赞
-        Query queryCommentLike = Query.query(Criteria.where("commentId").is(dto.getCommentId())
-                .and("authorId").is(user.getId()));
-        if (dto.getOperation() == 0) { // 点赞
-            ApCommentLike commentLike = mongoTemplate.findOne(queryCommentLike, ApCommentLike.class);
+        RLock lock = redissonClient.getLock("likes-lock");
+        lock.lock();
+        try {
+            Query queryCommentLike = Query.query(Criteria.where("commentId").is(dto.getCommentId())
+                    .and("authorId").is(user.getId()));
+            if (dto.getOperation() == 0) { // 点赞
+                ApCommentLike commentLike = mongoTemplate.findOne(queryCommentLike, ApCommentLike.class);
 
 //        点过赞提示 请勿重复点赞
-            if (commentLike != null) {
-                CustException.cust(AppHttpCodeEnum.DATA_EXIST, "请勿重复点赞");
-            }
+                if (commentLike != null) {
+                    CustException.cust(AppHttpCodeEnum.DATA_EXIST, "请勿重复点赞");
+                }
 
 //        未点过赞 保存点赞信息到mongo
-            commentLike = new ApCommentLike();
-            commentLike.setAuthorId(user.getId());
-            commentLike.setCommentId(dto.getCommentId());
-            commentLike.setOperation(dto.getOperation());
-            mongoTemplate.save(commentLike);
+                commentLike = new ApCommentLike();
+                commentLike.setAuthorId(user.getId());
+                commentLike.setCommentId(dto.getCommentId());
+                commentLike.setOperation(dto.getOperation());
+                mongoTemplate.save(commentLike);
 
 //        并修改评论信息的点赞数量( + 1)
-            comment.setLikes(comment.getLikes() + 1);
-            mongoTemplate.save(comment);
-        } else { // 取消点赞
+                comment.setLikes(comment.getLikes() + 1);
+                mongoTemplate.save(comment);
+            } else { // 取消点赞
 //        4. 如果是取消点赞操作
 //        删除点赞信息
-            mongoTemplate.remove(queryCommentLike);
+                mongoTemplate.remove(queryCommentLike);
 
 //        并修改评论信息的点赞数量( - 1) , 要判断下别减成负数
-            if (comment.getLikes() > 0) {
-                comment.setLikes(comment.getLikes() - 1);
-                mongoTemplate.save(comment);
+                if (comment.getLikes() > 0) {
+                    comment.setLikes(comment.getLikes() - 1);
+                    mongoTemplate.save(comment);
+                }
             }
+
+        } finally {
+            lock.unlock();
         }
 
 //        返回结果时，需要返回点赞点赞数量 返回的key要求必须是: likes

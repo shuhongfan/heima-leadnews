@@ -20,4 +20,13 @@ public interface ApArticleService extends IService<ApArticle> {
      * @return
      */
     ResponseResult load(Short loadtype, ArticleHomeDTO dto);
+
+    /**
+     * 根据参数加载文章列表  v2
+     * @param loadtypeLoadMore
+     * @param dto
+     * @param firstPage
+     * @return
+     */
+    public ResponseResult load2(Short loadtypeLoadMore, ArticleHomeDTO dto,boolean firstPage);
 }

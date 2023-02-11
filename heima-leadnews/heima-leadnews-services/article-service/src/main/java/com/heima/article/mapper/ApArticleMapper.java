@@ -16,4 +16,11 @@ public interface ApArticleMapper extends BaseMapper<ApArticle> {
      * @return
      */
     public List<ApArticle> loadArticleList(@Param("dto") ArticleHomeDTO dto, @Param("type") Short type);
+
+    /**
+     * 根据日期查询文章
+     * @param beginDate
+     * @return
+     */
+    public List<ApArticle> selectArticleByDate(@Param("beginDate") String beginDate);
 }

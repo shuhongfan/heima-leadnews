@@ -1,16 +1,21 @@
 package com.heima.behavior.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.heima.behavior.filter.AppTokenFilter;
 import com.heima.behavior.service.ApBehaviorEntryService;
 import com.heima.behavior.service.ApLikesBehaviorService;
+import com.heima.common.constants.article.HotArticleConstants;
 import com.heima.common.exception.CustException;
 import com.heima.model.behavior.dtos.LikesBehaviorDTO;
 import com.heima.model.behavior.pojos.ApBehaviorEntry;
 import com.heima.model.behavior.pojos.ApLikesBehavior;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.model.message.app.NewBehaviorDTO;
 import com.heima.model.threadlocal.AppThreadLocalUtils;
 import com.heima.model.user.pojos.ApUser;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,6 +25,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
+@Slf4j
 public class ApLikesBehaviorServiceImpl implements ApLikesBehaviorService {
 
     @Autowired
@@ -27,6 +33,9 @@ public class ApLikesBehaviorServiceImpl implements ApLikesBehaviorService {
 
     @Autowired
     private ApBehaviorEntryService apBehaviorEntryService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * 点赞或取消点赞
@@ -71,6 +80,14 @@ public class ApLikesBehaviorServiceImpl implements ApLikesBehaviorService {
             mongoTemplate.remove(query, ApLikesBehavior.class);
         }
 
+//        发送行为消息
+        NewBehaviorDTO newBehaviorDTO = new NewBehaviorDTO();
+        newBehaviorDTO.setType(NewBehaviorDTO.BehaviorType.LIKES);
+        newBehaviorDTO.setArticleId(dto.getArticleId());
+        newBehaviorDTO.setAdd(dto.getOperation().intValue() == 0 ? 1 : -1);
+
+        rabbitTemplate.convertAndSend(HotArticleConstants.HOT_ARTICLE_SCORE_BEHAVIOR_QUEUE, JSON.toJSON(newBehaviorDTO));
+        log.info("发送成功 文章点赞行为消息，消息内容：{}", newBehaviorDTO);
         return ResponseResult.okResult();
     }
 }

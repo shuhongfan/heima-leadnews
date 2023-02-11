@@ -1,5 +1,6 @@
 package com.heima.article.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.heima.article.mapper.ApArticleConfigMapper;
@@ -28,6 +29,7 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -65,6 +67,9 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
 
     @Value("${file.minio.readPath}")
     private String readPath;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 保存或修改文章
@@ -134,22 +139,57 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
 
 //        3. 返回结果 (封面需要拼接访问前缀)
         for (ApArticle article : articleList) {
-            String images = article.getImages();
-            if (StringUtils.isNotBlank(images)) {
-                images=Arrays.stream(images.split(","))
-                        // 每一个路径添加前缀
-                        .map(item -> webSite + item)
-                        // 将加了前缀的路径  拼接成字符串
-                        .collect(Collectors.joining(","));
-                article.setImages(images);
-            }
-
-//            给静态页路径添加访问前缀
-            article.setStaticUrl(readPath + article.getStaticUrl());
+//            给图片路径加上前缀
+            parseArticle(article);
         }
         //3 返回结果
         ResponseResult result = ResponseResult.okResult(articleList);
         return result;
+    }
+
+    /**
+     * 根据参数加载文章列表
+     * @param loadtype  0为加载更多  1为加载最新
+     * @param dto
+     * @param firstPage 是否为首页 true 首页
+     * @return
+     */
+    @Override
+    public ResponseResult load2(Short loadtype, ArticleHomeDTO dto, boolean firstPage) {
+        if (firstPage) {
+//            1. 从redis缓存中 查询热点文章数据
+            String articleListJSON = (String) redisTemplate.opsForValue().get(ArticleConstants.HOT_ARTICLE_FIRST_PAGE + dto.getTag());
+            if (StringUtils.isNotBlank(articleListJSON)) {
+                List<ApArticle> apArticles = JSON.parseArray(articleListJSON, ApArticle.class);
+                for (ApArticle apArticle : apArticles) {
+//                    给图片路径加上前缀
+                    parseArticle(apArticle);
+                }
+                ResponseResult result = ResponseResult.okResult(apArticles);
+                result.setHost(webSite);
+                return result;
+            }
+        }
+        return load(loadtype, dto);
+    }
+
+    /**
+     * 给图片路径加上前缀
+     * @param article
+     */
+    private void parseArticle(ApArticle article) {
+        String images = article.getImages();
+        if (StringUtils.isNotBlank(images)) {
+            images=Arrays.stream(images.split(","))
+                    // 每一个路径添加前缀
+                    .map(item -> webSite + item)
+                    // 将加了前缀的路径  拼接成字符串
+                    .collect(Collectors.joining(","));
+            article.setImages(images);
+        }
+
+//            给静态页路径添加访问前缀
+        article.setStaticUrl(readPath + article.getStaticUrl());
     }
 
     /**

@@ -35,6 +35,7 @@ public class ArticleHomeController {
     @ApiOperation(value = "查询最新文章",notes = "app文章列表上拉时 根据页面文章最大时间 查询最新文章")
     @PostMapping("/loadnew")
     public ResponseResult loadNew(@RequestBody ArticleHomeDTO dto) {
-        return articleService.load(ArticleConstants.LOADTYPE_LOAD_NEW,dto);
+//        return articleService.load(ArticleConstants.LOADTYPE_LOAD_NEW,dto);
+        return articleService.load2(ArticleConstants.LOADTYPE_LOAD_MORE,dto,true);
     }
 }

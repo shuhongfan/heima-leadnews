@@ -14,10 +14,13 @@
         <module name="heima-file-spring-boot-starter" />
         <module name="admin-gateway" />
         <module name="heima-exception-spring-boot-starter" />
+        <module name="springtask-test" />
         <module name="user-service" />
+        <module name="heima-schedule-spring-boot-starter" />
         <module name="mongodb-test" />
         <module name="app-gateway" />
         <module name="comment-service" />
+        <module name="xxljob-test" />
         <module name="article-service" />
         <module name="heima-leadnews-utils" />
         <module name="heima-knife4j-spring-boot-starter" />
@@ -63,10 +66,13 @@
       <module name="heima-leadnews-services" options="-parameters" />
       <module name="heima-leadnews-test" options="-parameters" />
       <module name="heima-leadnews-utils" options="-parameters" />
+      <module name="heima-schedule-spring-boot-starter" options="-parameters" />
       <module name="mongodb-test" options="-parameters" />
+      <module name="springtask-test" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="wemedia-gateway" options="-parameters" />
       <module name="wemedia-service" options="-parameters" />
+      <module name="xxljob-test" options="-parameters" />
     </option>
   </component>
 </project>

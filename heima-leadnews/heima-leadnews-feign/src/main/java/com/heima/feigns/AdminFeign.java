@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @FeignClient(
         value = "leadnews-admin",
         fallbackFactory = AdminFeignFallback.class,
@@ -23,4 +25,11 @@ public interface AdminFeign {
     @ApiOperation("根据id查询频道")
     @GetMapping("/api/v1/channel/one/{id}")
     public ResponseResult<AdChannel> findOne(@PathVariable Integer id);
+
+    /**
+     * 频道列表
+     * @return
+     */
+    @GetMapping("/api/v1/channel/channels")
+    ResponseResult<List<AdChannel>> selectChannels();
 }

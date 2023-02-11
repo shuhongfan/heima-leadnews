@@ -18,3 +18,6 @@ spring:
           - data-id: share-feign.yml
             group: DEFAULT_GROUP
             refresh: false
+          - data-id: share-rabbit.yml
+            group: DEFAULT_GROUP
+            refresh: false

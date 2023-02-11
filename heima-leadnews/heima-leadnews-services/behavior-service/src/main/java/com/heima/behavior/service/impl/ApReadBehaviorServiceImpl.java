@@ -1,16 +1,21 @@
 package com.heima.behavior.service.impl;
 import java.util.Date;
 
+import com.alibaba.fastjson.JSON;
 import com.heima.behavior.service.ApBehaviorEntryService;
 import com.heima.behavior.service.ApReadBehaviorService;
+import com.heima.common.constants.article.HotArticleConstants;
 import com.heima.common.exception.CustException;
 import com.heima.model.behavior.dtos.ReadBehaviorDTO;
 import com.heima.model.behavior.pojos.ApBehaviorEntry;
 import com.heima.model.behavior.pojos.ApReadBehavior;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.model.message.app.NewBehaviorDTO;
 import com.heima.model.threadlocal.AppThreadLocalUtils;
 import com.heima.model.user.pojos.ApUser;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -18,12 +23,16 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class ApReadBehaviorServiceImpl implements ApReadBehaviorService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Autowired
     private ApBehaviorEntryService apBehaviorEntryService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * 记录阅读行为
@@ -61,6 +70,14 @@ public class ApReadBehaviorServiceImpl implements ApReadBehaviorService {
             mongoTemplate.save(apReadBehavior);
         }
 
+//        发送行为消息
+        NewBehaviorDTO newBehaviorDTO = new NewBehaviorDTO();
+        newBehaviorDTO.setType(NewBehaviorDTO.BehaviorType.VIEWS);
+        newBehaviorDTO.setArticleId(dto.getArticleId());
+        newBehaviorDTO.setAdd(1);
+
+        rabbitTemplate.convertAndSend(HotArticleConstants.HOT_ARTICLE_SCORE_BEHAVIOR_QUEUE, JSON.toJSONString(newBehaviorDTO));
+        log.info("发送成功 文章阅读行为消息，消息内容：{}", newBehaviorDTO);
         return ResponseResult.okResult();
     }
 }
