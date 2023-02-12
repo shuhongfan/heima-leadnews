@@ -4,6 +4,7 @@ import com.heima.config.HeimaFeignAutoConfiguration;
 import com.heima.feigns.fallback.ArticleFeignFallback;
 import com.heima.model.article.pojos.ApAuthor;
 import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.search.vos.SearchArticleVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,4 +25,7 @@ public interface ArticleFeign {
     @ApiOperation(value = "保存作者", notes = "保存作者信息")
     @PostMapping("/api/v1/author/save")
     public ResponseResult save(@RequestBody ApAuthor apAuthor);
+
+    @GetMapping("/api/v1/article/{id}")
+    ResponseResult<SearchArticleVO> findArticle(@PathVariable("id") Long id);
 }

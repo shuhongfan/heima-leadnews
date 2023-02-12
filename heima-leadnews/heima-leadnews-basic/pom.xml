@@ -15,5 +15,6 @@
         <module>heima-exception-spring-boot-starter</module>
         <module>heima-aliyunsecurity-spring-boot-starter</module>
         <module>heima-schedule-spring-boot-starter</module>
+        <module>heima-es-spring-boot-starter</module>
     </modules>
 </project>

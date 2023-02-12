@@ -10,6 +10,7 @@ import com.heima.article.mapper.AuthorMapper;
 import com.heima.article.service.ApArticleService;
 import com.heima.article.service.GeneratePageService;
 import com.heima.common.constants.article.ArticleConstants;
+import com.heima.common.constants.message.NewsUpOrDownConstants;
 import com.heima.common.exception.CustException;
 import com.heima.feigns.AdminFeign;
 import com.heima.feigns.WemediaFeign;
@@ -26,6 +27,7 @@ import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.units.qual.A;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,6 +73,9 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     /**
      * 保存或修改文章
      * @param newsId 文章id
@@ -98,7 +103,8 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
         updateWmNews(wmNews, apArticle);
 
 //        7. 通过es 更新索引库
-
+        rabbitTemplate.convertAndSend(NewsUpOrDownConstants.NEWS_UP_FOR_ES_QUEUE, apArticle.getId());
+        log.info("文章 发布成功，并通知 search搜素微服务  更新索引信息  ========= {}", apArticle.getId());
     }
 
     /**

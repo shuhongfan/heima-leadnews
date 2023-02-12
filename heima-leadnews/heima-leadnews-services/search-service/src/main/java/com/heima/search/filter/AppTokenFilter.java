@@ -1,4 +1,4 @@
-package com.heima.behavior.filter;
+package com.heima.search.filter;
 
 import com.heima.model.threadlocal.AppThreadLocalUtils;
 import com.heima.model.user.pojos.ApUser;

@@ -17,6 +17,8 @@
         <module>wemedia-service</module>
         <module>article-service</module>
         <module>comment-service</module>
+        <module>data-sync-service</module>
+        <module>search-service</module>
     </modules>
 
     <dependencies>
@@ -71,6 +73,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+<!--        logstash-->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>5.2</version>
         </dependency>
     </dependencies>
 </project>
